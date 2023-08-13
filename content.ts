@@ -1,18 +1,16 @@
 import type { PlasmoCSConfig } from "plasmo"
 
-import { createInputElement } from "~inputElement"
+import { blacklistRegexes, createInputElement } from "~inputElement"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://www.reddit.com/*", "https://sh.reddit.com/*"],
   all_frames: true
 }
 
-let blacklistRegexes: RegExp[] = []
-
 window.addEventListener("load", main)
 
 function main() {
-  createInputElement(blacklistRegexes, filterPosts)
+  createInputElement(filterPosts)
   filterPosts()
 
   observePostFetching(() => filterPosts())
@@ -21,14 +19,21 @@ function main() {
 function filterPosts() {
   const posts = document.querySelectorAll("shreddit-post")
   if (posts.length === 0) return
+  console.log(blacklistRegexes)
   for (const post of posts) {
     const title = post.querySelector("[slot=title]")?.textContent
 
     // check if any words in the title match the regex of the filter
     const match =
-      blacklistRegexes.some(
-        (regex) => title?.toLocaleLowerCase().match(regex)
-      ) ?? false
+      blacklistRegexes.some((regex) => {
+        //if a simple word, add word boundaries
+        if (regex.source?.match(/^\w+$/)) {
+          return title
+            ?.toLocaleLowerCase()
+            .match(new RegExp(`\\b${regex.source}\\b`))
+        }
+        return title?.toLocaleLowerCase().match(regex)
+      }) ?? false
 
     // if there is a match, hide the post
     if (match) post.style.display = "none"
