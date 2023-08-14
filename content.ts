@@ -19,7 +19,7 @@ function main() {
 function filterPosts() {
   const posts = document.querySelectorAll("shreddit-post")
   if (posts.length === 0) return
-  console.log(blacklistRegexes)
+  //   console.log(blacklistRegexes)
   for (const post of posts) {
     const title = post.querySelector("[slot=title]")?.textContent
 
@@ -35,9 +35,13 @@ function filterPosts() {
         return title?.toLocaleLowerCase().match(regex)
       }) ?? false
 
-    // if there is a match, hide the post
-    if (match) post.style.display = "none"
-    else post.style.display = "block"
+    // // if there is a match, hide the post
+    post.style.transition = "all 0.5s"
+    if (match) {
+      post.style.display = "none"
+    } else {
+      post.style.display = "block"
+    }
   }
 
   //   if (document.querySelectorAll("shreddit-post").length < 3) {
