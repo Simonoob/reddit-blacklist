@@ -1,5 +1,6 @@
 # A simple extension to hide Reddit posts
 
+
 ## Features
 The flow is quite simple: the extension reads your blacklist, matches it to the post title, and it hides the post if there's a match.
 
@@ -13,7 +14,7 @@ The flow is quite simple: the extension reads your blacklist, matches it to the 
 3. Open Chrome, got to **Extensions** -> **Manage Extensions**
 4. Enable developer mode on the top right
 5. Click on the **Load Unpacked** button that appeared on the top left and select the unpacked build folder
-6. Get back to Reddit, you should have a new input next to the search bar
+6. Get back to Reddit and reload the page, you should have a new input next to the search bar
 
 
 ---
