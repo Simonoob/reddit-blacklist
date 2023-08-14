@@ -8,7 +8,7 @@ The flow is quite simple: the extension reads your blacklist, matches it to the 
 - The blacklist is saved on local storage for each subreddit, so you don't need to re-type it every visit
 
 ## Install
-1. Go to releases, download the latest build `chrome-mv3-prod.zip`
+1. Go to [releases](https://github.com/Simonoob/reddit-blacklist/releases/tag/v0.0.1), download the latest build `chrome-mv3-prod.zip`
 2. Unzip the file
 3. Open Chrome, got to **Extensions** -> **Manage Extensions**
 4. Enable developer mode on the top right
