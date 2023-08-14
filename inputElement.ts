@@ -12,9 +12,11 @@ export const createInputElement = ( filterPosts) => {
 
     // get the blacklist from local storage 
     chrome.storage.local.get(
-        [window.location.pathname],
+        `blacklist-${[window.location.pathname]}`,
         (result) => {
-        const blacklistFromStorage = result[window.location.pathname]
+        const blacklistFromStorage = result[
+        `blacklist-${[window.location.pathname]}`
+]
         if (blacklistFromStorage) {
             blacklistInput.value = blacklistFromStorage
             updateBlacklistAndFilter(blacklistInput.value, filterPosts)
@@ -40,7 +42,7 @@ function updateBlacklistAndFilter(blacklist,filterPosts) {
       .map((word) => word !== "" && new RegExp(word.toLocaleLowerCase())) : []
 
     // store the blacklist in local storage with the current subreddit as the key
-    chrome.storage.local.set({ [window.location.pathname]: blacklist })
+    chrome.storage.local.set({ [ `blacklist-${[window.location.pathname]}`]: blacklist })
 
 
     filterPosts()
